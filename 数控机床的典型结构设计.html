@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3章 数控机床的典型结构设计 - 考点梳理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", "宋体", Arial, sans-serif;
+        }
+        body {
+            padding: 25px 40px;
+            line-height: 1.8;
+            background-color: #f9f9f9;
+            color: #222;
+            font-size: 16px;
+        }
+        /* 主标题样式 */
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #1a5fb4;
+            margin-bottom: 30px;
+            font-weight: bold;
+            border-bottom: 3px solid #1a5fb4;
+            padding-bottom: 10px;
+        }
+        /* 一级小节（3.1/3.2）样式 */
+        h2 {
+            font-size: 22px;
+            color: #0d47a1;
+            margin: 25px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid #0d47a1;
+        }
+        /* 二级小节（3.1.1/3.2.1）样式 */
+        h3 {
+            font-size: 19px;
+            color: #1565c0;
+            margin: 20px 0 10px 20px;
+            font-weight: 600;
+        }
+        /* 三级子项样式 */
+        ul {
+            margin-left: 50px;
+            list-style: none;
+        }
+        ul li {
+            position: relative;
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        ul li::before {
+            content: "├─";
+            position: absolute;
+            left: 0;
+            color: #555;
+        }
+        /* 最末级子项符号修正 */
+        ul li.last-item::before {
+            content: "└─";
+        }
+        /* 重点标注样式 - 速记/必会/高频考点 */
+        .suji {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .must {
+            background-color: #fff3e0;
+            color: #e65100;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .exam {
+            background-color: #fce4ec;
+            color: #c2185b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #d32f2f;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        /* 特征/缺点分组样式 */
+        .feature {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .shortage {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+        /* 适配小屏幕 */
+        @media (max-width: 768px) {
+            body { padding: 15px 20px; }
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 17px; margin-left: 10px; }
+            ul { margin-left: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>第3章 数控机床的典型结构设计</h1>
+
+    <h2>3.1 导轨设计（支承与导向的“底盘”）</h2>
+    <h3>3.1.1 导轨的作用（<span class="must">必会一句话</span>）</h3>
+    <ul>
+        <li class="last-item"><span class="suji">速记：</span>导轨决定运动精度与刚度；摩擦/阻尼影响爬行与振动</li>
+    </ul>
+
+    <h3>3.1.2 导轨类型（<span class="exam">选择/多选常考</span>）</h3>
+    <ul>
+        <li>滑动导轨
+            <ul>
+                <li><span class="feature">特征：</span>面接触；阻尼大；抗振好</li>
+                <li class="last-item"><span class="shortage">缺点：</span>摩擦大→低速爬行/发热；磨损影响精度；需良好润滑</li>
+            </ul>
+        </li>
+        <li>滚动导轨
+            <ul>
+                <li><span class="feature">特征：</span>滚动摩擦小；速度高；灵敏</li>
+                <li class="last-item"><span class="shortage">缺点：</span>阻尼小→抗振较差；对安装/精度/洁净度敏感；成本较高</li>
+            </ul>
+        </li>
+        <li class="last-item">静压导轨
+            <ul>
+                <li><span class="feature">特征：</span>油膜承载；摩擦极小；运动平稳；热稳定好</li>
+                <li class="last-item"><span class="shortage">缺点：</span>系统复杂；成本高；需可靠供油与维护</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3.1.3 评价指标（<span class="exam">简答“背词条”</span>）</h3>
+    <ul>
+        <li>刚度：静/动刚度（抗变形）</li>
+        <li>摩擦特性：低速爬行(stick-slip)、摩擦发热</li>
+        <li>阻尼：抗振能力</li>
+        <li>耐磨与寿命</li>
+        <li class="last-item">热稳定性/制造装配与成本</li>
+    </ul>
+
+    <h2>3.2 主轴组件设计（精度与抗振的“核心”）</h2>
+    <h3>3.2.1 关键结构要素（<span class="must">必考点</span>）</h3>
+    <ul>
+        <li>支承形式/轴承配置（前后支承）</li>
+        <li>支承跨距（<span class="exam">常考“为什么重要”</span>）</li>
+        <li class="last-item">预紧/消隙（保证受力均匀、减少间隙）</li>
+    </ul>
+
+    <h3>3.2.2 跨距影响（<span class="exam">分析题高频</span>）</h3>
+    <ul>
+        <li class="last-item"><span class="suji">速记：</span>跨距影响刚度、回转精度、抗振；跨距选取是主轴设计关键</li>
+    </ul>
+
+    <h3>3.2.3 提升回转精度措施（<span class="must">可直接当简答答案</span>）</h3>
+    <ul>
+        <li>消除间隙并适当预紧（受力均匀）</li>
+        <li>控制圆度误差（关键加工误差）</li>
+        <li class="last-item">通过装配与精加工保证同轴/配合精度</li>
+    </ul>
+
+    <h3>3.2.4 动态特性与抗振（<span class="exam">分析题模板</span>）</h3>
+    <ul>
+        <li>避开固有频率与激振频率（防共振）</li>
+        <li>阻尼很关键：尤其前轴承阻尼</li>
+        <li>三支承结构：辅助支承可提高抗振</li>
+        <li class="last-item">必要时增加消振装置</li>
+    </ul>
+
+    <h2>3.3 位置检测装置（<span class="exam">“装哪里=什么环”最爱考</span>）</h2>
+    <h3>3.3.1 考核核心：装置安装位置→控制环路类型</h3>
+    <ul>
+        <li>装在电机/丝杠侧 → 半闭环（间接测位移）</li>
+        <li class="last-item">装在移动部件侧（工作台/滑座）→ 闭环/全闭环（直接测位移）</li>
+    </ul>
+
+    <h3>3.3.2 光栅尺（<span class="exam">全闭环高频</span>）</h3>
+    <ul>
+        <li><span class="feature">特征：</span>直接测位移；可补偿传动链误差（全闭环）</li>
+        <li class="last-item"><span class="suji">速记：</span>光栅=直测位移=全闭环</li>
+    </ul>
+
+    <h3>3.3.3 磁栅（磁尺）</h3>
+    <ul>
+        <li><span class="feature">特征：</span>磁性标尺记录周期信号；环境适应性好</li>
+        <li class="last-item"><span class="suji">速记：</span>磁尺=抗环境、安装调试友好</li>
+    </ul>
+
+    <h3>3.3.4 感应同步器</h3>
+    <ul>
+        <li><span class="feature">特征：</span>精度高</li>
+        <li class="last-item"><span class="error">易错点：</span>安装间隙要求严格（间隙变化会影响灵敏度/精度）</li>
+    </ul>
+
+    <h2>3.4 换刀装置（ATC）（<span class="exam">简答/填空高频“要求清单”</span>）</h2>
+    <h3>3.4.1 ATC目标</h3>
+    <ul>
+        <li class="last-item"><span class="suji">速记：</span>减少辅助时间→提高效率；保证换刀可靠与精度</li>
+    </ul>
+
+    <h3>3.4.2 基本要求（<span class="must">五条背成口令</span>）</h3>
+    <ul>
+        <li>换刀时间短（快）</li>
+        <li>重复定位精度高（准）</li>
+        <li>存储量足（多）</li>
+        <li>刀库占地小/结构紧凑（小）</li>
+        <li class="last-item">安全可靠（稳）</li>
+    </ul>
+
+    <h3>3.4.3 常见答题句（<span class="exam">简答可用</span>）</h3>
+    <ul>
+        <li class="last-item">“快、准、多、小、稳” + 说明对效率与加工一致性的影响</li>
+    </ul>
+
+    <h2>3.5 计算机数控系统（CNC）（<span class="exam">开放式数控必考“为什么”</span>）</h2>
+    <h3>3.5.1 CNC系统定位（<span class="must">必会</span>）</h3>
+    <ul>
+        <li class="last-item"><span class="suji">速记：</span>CNC是控制核心；与伺服/检测/机床本体构成闭环控制系统</li>
+    </ul>
+
+    <h3>3.5.2 专用型数控 vs 通用型（工业PC平台）（<span class="exam">选择/简答</span>）</h3>
+    <ul>
+        <li>专用型
+            <ul>
+                <li><span class="feature">优点：</span>专用稳定、针对性强</li>
+                <li class="last-item"><span class="shortage">缺点：</span>通用性差；维修升级困难且费用高</li>
+            </ul>
+        </li>
+        <li class="last-item">通用型（工业PC）
+            <ul>
+                <li><span class="feature">优点：</span>成本低；维护方便；软硬件扩展强</li>
+                <li class="last-item"><span class="shortage">风险：</span>需要保证实时性/可靠性（系统集成要求高）</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3.5.3 开放式数控（<span class="exam">简答/分析高频</span>）</h3>
+    <ul>
+        <li>提出原因：封闭系统不兼容、升级维护贵且难；与计算机技术发展相比更新慢</li>
+        <li class="last-item"><span class="suji">速记：</span>封闭→不兼容/难升级/贵 → 开放架构</li>
+    </ul>
+
+</body>
+</html>
